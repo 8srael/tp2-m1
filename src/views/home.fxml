@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="969.0" stylesheets="@../application/light.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+   <children>
+      <Pane style="-fx-background-color: #FFF; -fx-background-radius: 10;">
+         <children>
+            <VBox prefHeight="530.0" prefWidth="207.0" style="-fx-background-color: #E5E5E5;">
+               <children>
+                  <ImageView fitHeight="144.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pics/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="homeBtn" alignment="BASELINE_LEFT" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="37.0" prefWidth="210.0" text="ACCUEIL">
+                     <font>
+                        <Font name="SimSun" size="13.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="#2a73ff" glyphName="HOME" size="1.2em" />
+                     </graphic>
+                     <padding>
+                        <Insets bottom="5.0" left="40.0" top="5.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="yearBtn" alignment="BASELINE_LEFT" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="37.0" prefWidth="210.0" text="ANNEES">
+                     <graphic>
+                        <FontAwesomeIcon fill="#25bfbb" glyphName="DASHBOARD" size="1.2em" />
+                     </graphic>
+                     <font>
+                        <Font name="SimSun" size="13.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="40.0" top="5.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="teacherBtn" alignment="BASELINE_LEFT" graphicTextGap="7.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="37.0" prefWidth="210.0" text="ENSEIGNANT">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon fill="#1cbabf" glyphName="USER" size="1.2em" text="" />
+                     </graphic>
+                     <font>
+                        <Font name="SimSun" size="13.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="40.0" top="5.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="ueBtn" alignment="BASELINE_LEFT" graphicTextGap="7.0" layoutX="10.0" layoutY="47.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="37.0" prefWidth="210.0" text="UES">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon fill="#fa5e7e" glyphName="BOOK" size="1.2em" />
+                     </graphic>
+                     <font>
+                        <Font name="SimSun" size="13.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="40.0" top="5.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="groupBtn" alignment="BASELINE_LEFT" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="37.0" prefWidth="210.0" text="GROUPES">
+                     <graphic>
+                        <FontAwesomeIcon fill="#b642c3" glyphName="USERS" size="1.2em" />
+                     </graphic>
+                     <font>
+                        <Font name="SimSun" size="13.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="40.0" top="5.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="repartitionBtn" alignment="BASELINE_LEFT" graphicTextGap="7.0" layoutX="10.0" layoutY="84.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="37.0" prefWidth="210.0" text="REPARTITION - HEURES">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon fill="#de0000" glyphName="CALENDAR" size="1.2em" />
+                     </graphic>
+                     <font>
+                        <Font name="SimSun" size="13.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="40.0" top="5.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="reviewBtn" alignment="BASELINE_LEFT" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="37.0" prefWidth="210.0" text="BILAN">
+                     <font>
+                        <Font name="SimSun" size="13.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon size="1.2em" />
+                     </graphic>
+                     <padding>
+                        <Insets bottom="5.0" left="40.0" top="5.0" />
+                     </padding>
+                  </Button>
+                  <Pane prefHeight="254.0" prefWidth="207.0">
+                     <children>
+                        <Circle fx:id="shpActive" fill="WHITE" layoutX="53.0" layoutY="72.0" radius="7.0" stroke="#1cd95c" strokeType="INSIDE" />
+                        <Circle fill="WHITE" layoutX="53.0" layoutY="104.0" radius="7.0" stroke="#d9c81c" strokeType="INSIDE" />
+                        <Circle fill="WHITE" layoutX="53.0" layoutY="134.0" radius="7.0" stroke="#da1c1c" strokeType="INSIDE" />
+                        <Line endX="-4.0" endY="-8.0" layoutX="34.0" layoutY="43.0" startX="148.0" startY="-8.0" stroke="#ddd1d1" />
+                        <Label fx:id="lblActive" layoutX="77.0" layoutY="65.0" text="10 Active" textFill="#4a4747">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblOffline" layoutX="77.0" layoutY="96.0" text="2 Offline" textFill="#4a4747">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblExp" layoutX="77.0" layoutY="126.0" text="8 Expired" textFill="#4a4747">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color blue="0.8549019694328308" green="0.8549019694328308" red="0.8549019694328308" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </VBox>
+            <StackPane fx:id="parent_container" layoutX="207.0" prefHeight="530.0" prefWidth="764.0">
+               <children>
+                  <Pane fx:id="homePane">
+                     <children>
+                        <Label layoutX="255.0" layoutY="38.0" text="LOGICIEL DE REAPRTITION DES HEURES">
+                           <font>
+                              <Font name="SimSun-ExtB" size="15.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" layoutX="100.0" layoutY="238.0" spacing="50.0">
+                           <children>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label text="22000" textFill="#1cbabf">
+                                       <font>
+                                          <Font name="System Bold" size="26.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Enseignants">
+                                       <font>
+                                          <Font name="SimSun-ExtB" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label text="1500" textFill="#fa5e7e">
+                                       <font>
+                                          <Font name="System Bold" size="26.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Unités d'enseignement">
+                                       <font>
+                                          <Font name="SimSun-ExtB" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label text="1000" textFill="#b642c3">
+                                       <font>
+                                          <Font name="System Bold" size="26.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Peding Orders">
+                                       <font>
+                                          <Font name="SimSun-ExtB" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label text="780" textFill="#de0000">
+                                       <font>
+                                          <Font name="System Bold" size="26.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Orders on Hold">
+                                       <font>
+                                          <Font name="SimSun-ExtB" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <Circle fill="#f94344" layoutX="737.0" layoutY="24.0" radius="14.0" stroke="WHITE" strokeType="INSIDE" />
+                        <Label fx:id="lblClose" alignment="CENTER" layoutX="723.0" layoutY="16.0" prefHeight="17.0" prefWidth="28.0" text="X" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="yearLabel" layoutX="382.0" layoutY="401.0">
+                           <font>
+                              <Font name="Ink Free" size="30.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </StackPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

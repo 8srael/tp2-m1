@@ -1,0 +1,154 @@
+.button {
+    -fx-background-color: #E5E5E5;
+    -fx-text-fill: #383838;
+    -fx-text-alignment: left;
+}
+
+.button:hover {
+    -fx-background-color: #E5E5E5;
+    -fx-text-fill: #000;
+}
+
+.button:pressed {
+    -fx-background-color: #E5E5E5;
+    -fx-text-fill: #364FCD;
+}
+
+.button:focused {
+    -fx-background-color: #D9D9D9;
+    -fx-text-fill: #364FCD;
+}
+
+.button2 {
+    -fx-background-color: #0C39FF;
+    -fx-border-color: #FFF;
+    -fx-text-fill: #FFF;
+}
+
+.button2:hover {
+    -fx-background-color: #0C3988;
+    -fx-text-fill: #FFF;
+}
+
+.button2:pressed {
+    -fx-background-color: #0C3400;
+    -fx-text-fill: #FFF;
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-cell-size: 20;
+    -fx-background-color: #2D75E8;
+}
+
+.table-view .column-header .label {
+
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+.table-view .cell {
+    -fx-cell-size: 30;
+    -fx-alignment: center;
+    -fx-text-fill: #000000;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgb(127, 172, 243);
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: white;
+
+}
+
+/* scroll bar starts here */
+
+/* The increment and decrement button CSS class of scrollbar */
+.table-view .increment-button, .table-view .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+
+}
+
+/* The main scrollbar **track** CSS class  */
+.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: derive(#2D75E8, 80%);
+    -fx-background-radius: 2em;
+    -fx-border-radius: 2em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color: derive(#2D75E8, 90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
+}
+
+/* chart properties */
+
+.chart {
+    -fx-padding: 10px;
+    -fx-background-color: transparent;
+    -fx-legend-visible: false;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-pie {
+    -fx-border-color: derive(-fx-pie-color, 1%);
+    -fx-border-width: 0px;
+}
+
+.data0.chart-pie {
+    -fx-pie-color: #364FCD;
+}
+
+.data1.chart-pie {
+    -fx-pie-color: #54AAF3;
+}
+
+
+/* Style de base du TextField */
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #fc7499; 
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+
+/* Appliquer un style au texte des éléments */
+.combo-box-base .list-cell {
+    /*-fx-background-color: #3d4855; Couleur du fond */
+    -fx-font-family: "SimSun";
+}
+
+/* Appliquer un style au texte sélectionné */
+.combo-box .list-cell:selected {
+    -fx-text-fill: #fff; /* Couleur du texte sélectionné */
+    -fx-background-color: #2a73ff; /* Couleur du fond sélectionné */
+    -fx-font-family: "SimSun";
+}
+
+.infos-ue {
+	-fx-border-color: #000; /* Couleur de la bordure */
+    -fx-border-width: 1px;   /* Largeur de la bordure */
+    -fx-border-style: solid; /* Style de la bordure (dotted, dashed, solid, double, etc.) */
+    -fx-padding: 3px;
+}
+
+.rad-style{
+	-fx-border-color: black;  /* Couleur de la bordure */
+    -fx-border-width: 0 0 0 1; /* Largeur de la bordure à gauche */
+    -fx-border-style: solid;
+}
+

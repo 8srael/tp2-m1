@@ -1,0 +1,35 @@
+/*Buttons */
+
+.button {
+	/*-fx-background-color: #050720;*/
+	-fx-background-color: #01022a;
+	-fx-text-fill: #e7e5e5;
+}
+
+.button:hover {
+	-fx-background-color: #10165F;
+}
+
+.button:pressed {
+	-fx-background-color: #1620A1;
+}
+
+
+.data0.chart-pie {
+    -fx-pie-color: #364FCD;
+}
+
+.data1.chart-pie {
+    -fx-pie-color: #54AAF3;
+}
+
+/*
+.text-field {
+    -fx-background-color: #3d4855;
+    -fx-text-fill: white;
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-color: #fff;
+    -fx-border-width: 0.5;    
+}
+
+*/
