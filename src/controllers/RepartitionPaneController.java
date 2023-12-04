@@ -195,7 +195,7 @@ public class RepartitionPaneController implements Initializable {
     		Utils.getTuyEntity().create(teacher_ue_year);
     		
     		//tableview observableList updated
-    		System.out.println("Teacher_UE_Year created : " + teacher_ue_year.getTeacher().getFirstName());
+//    		System.out.println("Teacher_UE_Year created : " + teacher_ue_year.getTeacher().getFirstName());
     		addCombinedData(teacher_ue_year);
     		
     		alert = new Alert(AlertType.INFORMATION);
@@ -267,11 +267,7 @@ public class RepartitionPaneController implements Initializable {
     		
     	}
     	sum[0] = sumCM; sum[1] = sumTD; sum[2] = sumTP;
-    	
-    	System.out.println("size ue.tuy : " + Utils.getTeacherUEYearsByUE(ue));
-    	
-    	System.out.println(sum[0] + "\t" + sum[1] + "\t" + sum[2]);
-    	System.out.println("ok");
+    	    	
     	return sum;
       
     }
