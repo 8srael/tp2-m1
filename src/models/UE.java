@@ -2,7 +2,6 @@ package models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -71,27 +70,27 @@ public class UE  {
 		this.label = label;
 	}
 
-	public int getnHoursCM() {
+	public int getNHoursCM() {
 		return nHoursCM;
 	}
 
-	public void setnHoursCM(int nHoursCM) {
+	public void setNHoursCM(int nHoursCM) {
 		this.nHoursCM = nHoursCM;
 	}
 
-	public int getnHoursTD() {
+	public int getNHoursTD() {
 		return nHoursTD;
 	}
 
-	public void setnHoursTD(int nHoursTD) {
+	public void setNHoursTD(int nHoursTD) {
 		this.nHoursTD = nHoursTD;
 	}
 
-	public int getnHoursTP() {
+	public int getNHoursTP() {
 		return nHoursTP;
 	}
 
-	public void setnHoursTP(int nHoursTP) {
+	public void setNHoursTP(int nHoursTP) {
 		this.nHoursTP = nHoursTP;
 	} 		
 	

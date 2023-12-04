@@ -3,8 +3,6 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.persistence.EntityManager;
-
 import com.jfoenix.controls.JFXComboBox;
 
 import javafx.collections.FXCollections;
@@ -19,21 +17,20 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 import models.Group;
 import models.Teacher;
 import models.Teacher_UE_Year;
 import models.UE;
 import models.Year;
 import utils.CombinedDataAttribution;
-import utils.GenericEntity;
-import utils.JPAUtil;
 import utils.Utils;
 
 public class RepartitionPaneController implements Initializable {
 	
 	//  left = heures par groupe ; 
-	// middle = Reste à distribuer
-	// right - totale heures
+	// middle - totale heures;
+	// right = Reste à distribuer;
 
 	@FXML
     private JFXComboBox<UE> ueCombo;
@@ -55,7 +52,6 @@ public class RepartitionPaneController implements Initializable {
     
     @FXML
     private TextField tdField;
-
 
     @FXML
     private StackPane stackFieldTP;
@@ -89,6 +85,9 @@ public class RepartitionPaneController implements Initializable {
 
     @FXML
     private Label rightTpLabel;
+    
+    @FXML
+    private Circle already;
  
     @FXML
     private TableColumn<CombinedDataAttribution, String> fullNameColumn;
@@ -105,75 +104,59 @@ public class RepartitionPaneController implements Initializable {
     @FXML
     private TableView<CombinedDataAttribution> recapTableView;
 
-    
-	private EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	
-	// Generic Entity Instances
-	private GenericEntity<UE> ueEntity = new GenericEntity<>(entityManager, UE.class);
-	GenericEntity<Year> yearEntity = new GenericEntity<>(entityManager, Year.class);
-	GenericEntity<Teacher_UE_Year> tuyEntity = new GenericEntity<Teacher_UE_Year>(entityManager, Teacher_UE_Year.class);
-	
+
 	// Entities ObservableList
 	private ObservableList<CombinedDataAttribution> combinedDataObsList = FXCollections.observableArrayList();
 	
 	
 	Alert alert;
 	
-
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+    	
+//    	if(teacherCombo.getSelectionModel().isEmpty())
+//			already.setStyle("-fx-fill : #ffffff; -fx-stroke : #ffffff");
+    		
 		System.out.println(stackFieldCM.getChildren().get(0));
 		
+		// Combo Data
 		teacherCombo.setItems(Utils.getObsListTeacher());
-		
-//		System.out.println(Utils.getObsListUE());
 		ueCombo.setItems(Utils.getObsListUE());
 		yearCombo.setItems(Utils.getObsListYear());
 		
 		labelCenter(leftCmLabel, leftTdLabel, leftTpLabel, middleCmLabel, middleTdLabel, middleTpLabel, rightCmLabel, rightTdLabel, rightTpLabel);
 				
 		
-		ueCombo.getSelectionModel().selectedItemProperty().addListener((obs, old, neww) -> {
-			if(obs != null) {
-				tableViewData(obs.getValue());
+		yearCombo.getSelectionModel().selectedItemProperty().addListener((obsY, oldY, newY) -> {
+			if(newY != null) {
 				System.out.println("In uecombo listener " + combinedDataObsList);
 				recapTableView.setItems(combinedDataObsList);
-				Year year = yearCombo.getSelectionModel().getSelectedItem();
-				
-				if(year != null) {
-					UE ue = obs.getValue();
-				
-					Group group = ueEntity.getGroupByYearAndUe(ue, year);
 					
-					int totalCM = group.getUe().getnHoursCM() * group.getnGroupsCM();
-					int totalTD = group.getUe().getnHoursTD() * group.getnGroupsTD();
-					int totalTP = group.getUe().getnHoursTP() * group.getnGroupsTP();
+				ueCombo.getSelectionModel().selectedItemProperty().addListener((obsU, oldU, newU) -> {
+					tableViewData(newU, newY);
 					
-					// CM,TD,TP par crew
-					leftCmLabel.setText(group.getUe().getnHoursCM() + "");
-					leftTdLabel.setText(group.getUe().getnHoursTD() + "");
-					leftTpLabel.setText(group.getUe().getnHoursTP() + "");
+					Group group = Utils.getGroupByYearAndUe(newU, newY);
+										
+					getLabelData(group);
 					
-					// CM, TD, TP total
-					middleCmLabel.setText(totalCM + "");
-					middleTdLabel.setText(totalTD + "");
-					middleTpLabel.setText(totalTP +"");
-					
-					
-					// CM, TD, TP Reste à distribuer
-					rightCmLabel.setText(totalCM - getSumAttributionHoursByUE(ue)[0] + "");
-					rightTdLabel.setText(totalTD - getSumAttributionHoursByUE(ue)[1] + "");
-					rightTpLabel.setText(totalTP - getSumAttributionHoursByUE(ue)[2] + "");
-					
-					
-					labelCenter(leftCmLabel, leftTdLabel, leftTpLabel, middleCmLabel, middleTdLabel, middleTpLabel, rightCmLabel, rightTdLabel, rightTpLabel);
-					
-					
-				}
-				
-			}
+					// check assignation of a teacher
+					teacherCombo.getSelectionModel().selectedItemProperty().addListener((obsT, oldT, newT)-> {
+						if(Utils.checkAssigned(newY, newU, newT)) {
+							already.setStyle("-fx-fill : #ff0000; -fx-stroke : #ff0000");
+						} else { 
+							already.setStyle("-fx-fill : #00ff00; -fx-stroke : #00ff00");
+						}
+						
+						if(teacherCombo.getSelectionModel().isEmpty())
+							already.setStyle("-fx-fill : #ffffff; -fx-stroke : #ffffff");
+					});
+						
+				});
+			}				
 		});
+		
+		
 		
 		
 		// TableView treatment
@@ -189,11 +172,12 @@ public class RepartitionPaneController implements Initializable {
     	if(cmField.getText().isEmpty() || tpField.getText().isEmpty()|| tdField.getText().isEmpty()
     			|| yearCombo.getSelectionModel().getSelectedItem() == null
     			|| ueCombo.getSelectionModel().getSelectedItem() == null
-    			|| teacherCombo.getSelectionModel().getSelectedItem() == null){
+    			|| teacherCombo.getSelectionModel().getSelectedItem() == null
+    			|| already.getStyle().equalsIgnoreCase("-fx-fill : #ff0000; -fx-stroke : #ff0000")){
     		
     		alert = new Alert(AlertType.WARNING);
 			
-			alert.setContentText("One textfield at least is empty");
+			alert.setContentText("One textfield or combo at least is empty");
 			alert.show();
     	} else {
     		Teacher teacher  = teacherCombo.getSelectionModel().getSelectedItem();
@@ -208,7 +192,7 @@ public class RepartitionPaneController implements Initializable {
     		teacher_ue_year.setNHoursTDAss(Integer.parseInt(tdField.getText()));
     		teacher_ue_year.setNHoursTPAss(Integer.parseInt(tpField.getText()));
     		
-    		tuyEntity.create(teacher_ue_year);
+    		Utils.getTuyEntity().create(teacher_ue_year);
     		
     		//tableview observableList updated
     		System.out.println("Teacher_UE_Year created : " + teacher_ue_year.getTeacher().getFirstName());
@@ -218,11 +202,10 @@ public class RepartitionPaneController implements Initializable {
 			alert.setTitle("Attribution information".toUpperCase());
 			alert.setContentText("Attribution done successfully");
 			alert.show();
-			clearControls();
-    		
-
-
-    		
+			
+			System.out.println("After add ");
+			getLabelData(Utils.getGroupByYearAndUe(ue, year));
+			clearControls();	
     	}
     }
 
@@ -236,11 +219,11 @@ public class RepartitionPaneController implements Initializable {
 
     }
     
-    private void tableViewData(UE ue) {
-//    	this.recapTableView.getItems().clear();
-    	if(ue != null) {
-			for( Teacher_UE_Year tuy: ue.getTeacher_UE_Years()) {
-	    		System.out.println(ue.getTeacher_UE_Years());
+    private void tableViewData(UE ue, Year year) {
+    	this.recapTableView.getItems().clear();
+    	if(year != null && ue != null) {
+			for( Teacher_UE_Year tuy: Utils.getTuyByYearAndUe(ue, year)) {
+	    		System.out.println(year.getTeacher_UE_Years());
 				addCombinedData(tuy);
 			}
 			
@@ -277,13 +260,18 @@ public class RepartitionPaneController implements Initializable {
     	int [] sum = new int[3];
     	int sumCM = 0, sumTD = 0, sumTP = 0;
   
-    	for(Teacher_UE_Year tuy: ue.getTeacher_UE_Years()) {    		
+    	for(Teacher_UE_Year tuy: Utils.getTeacherUEYearsByUE(ue)) {  
     		sumCM += tuy.getNHoursCMAss();
     		sumTD += tuy.getNHoursTDAss();
     		sumTP += tuy.getNHoursTPAss();
+    		
     	}
     	sum[0] = sumCM; sum[1] = sumTD; sum[2] = sumTP;
     	
+    	System.out.println("size ue.tuy : " + Utils.getTeacherUEYearsByUE(ue));
+    	
+    	System.out.println(sum[0] + "\t" + sum[1] + "\t" + sum[2]);
+    	System.out.println("ok");
     	return sum;
       
     }
@@ -309,4 +297,50 @@ public class RepartitionPaneController implements Initializable {
 //    	recapTableView.getItems().clear();	
     }
     
+    private void getLabelData(Group group) {
+    	if(group != null) {
+			int totalCM = group.getUe().getNHoursCM() * group.getnGroupsCM();
+			int totalTD = group.getUe().getNHoursTD() * group.getnGroupsTD();
+			int totalTP = group.getUe().getNHoursTP() * group.getnGroupsTP();
+			
+			// CM,TD,TP par crew
+			leftCmLabel.setText(group.getUe().getNHoursCM() + "");
+			leftTdLabel.setText(group.getUe().getNHoursTD() + "");
+			leftTpLabel.setText(group.getUe().getNHoursTP() + "");
+			
+			// CM, TD, TP total
+			middleCmLabel.setText(totalCM + "");
+			middleTdLabel.setText(totalTD + "");
+			middleTpLabel.setText(totalTP +"");
+			
+			System.out.println("Ueeeeeeeeeeee : " + group.getUe().getLabel());
+			
+			// CM, TD, TP Reste à distribuer
+			rightCmLabel.setText(totalCM - getSumAttributionHoursByUE(group.getUe())[0] + "");
+			rightTdLabel.setText(totalTD - getSumAttributionHoursByUE(group.getUe())[1] + "");
+			rightTpLabel.setText(totalTP - getSumAttributionHoursByUE(group.getUe())[2] + "");
+			
+			
+			labelCenter(leftCmLabel, leftTdLabel, leftTpLabel, middleCmLabel, middleTdLabel, middleTpLabel, rightCmLabel, rightTdLabel, rightTpLabel);
+		}
+    	
+    	else {
+    		// CM,TD,TP par crew
+			leftCmLabel.setText("0");
+			leftTdLabel.setText("0");
+			leftTpLabel.setText("0");
+			
+			// CM, TD, TP total
+			middleCmLabel.setText("0");
+			middleTdLabel.setText("0");
+			middleTpLabel.setText("0");
+			
+			
+			// CM, TD, TP Reste à distribuer
+			rightCmLabel.setText("0");
+			rightTdLabel.setText("0");
+			rightTpLabel.setText("0");
+			labelCenter(leftCmLabel, leftTdLabel, leftTpLabel, middleCmLabel, middleTdLabel, middleTpLabel, rightCmLabel, rightTdLabel, rightTpLabel);
+    	}
+    }
 }

@@ -1,0 +1,6 @@
+/bin/
+/.settings/
+/build.fxbuild
+META-INF/
+.project
+.classpath

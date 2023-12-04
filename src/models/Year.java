@@ -32,7 +32,6 @@ public class Year {
 	public Year() {}
 
 	public Year(String label) {
-		super();
 		this.label = label;
 	}
 

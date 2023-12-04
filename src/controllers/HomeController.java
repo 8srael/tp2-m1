@@ -22,6 +22,12 @@ import utils.JPAUtil;
 public class HomeController implements Initializable {
 	@FXML
     private Button homeBtn;
+	
+	@FXML
+    private Button yearBtn;
+	 
+	@FXML
+	private Button groupBtn;
 
     @FXML
     private Button teacherBtn;
@@ -47,7 +53,7 @@ public class HomeController implements Initializable {
     private EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	private GenericEntity<Year> yearEntity = new GenericEntity<>(entityManager, Year.class);
     
-    private Pane teacherPane, uePane, repartitionPane, reviewPane;
+    private Pane teacherPane, uePane, repartitionPane, reviewPane, yearPane, groupPane;
 	
     @Override
     public void initialize(URL location, ResourceBundle resources) {	
@@ -62,12 +68,14 @@ public class HomeController implements Initializable {
 			uePane = FXMLLoader.load(getClass().getResource("/views/ue_pane.fxml"));
 			repartitionPane = FXMLLoader.load(getClass().getResource("/views/repartition_pane.fxml"));
 			reviewPane = FXMLLoader.load(getClass().getResource("/views/review_pane.fxml"));
+			yearPane = FXMLLoader.load(getClass().getResource("/views/year_pane.fxml"));
+			groupPane = FXMLLoader.load(getClass().getResource("/views/group_pane.fxml"));
 		
 
 			// Add all fxml panes to home stackpane
-			parent_container.getChildren().addAll(reviewPane, repartitionPane, uePane, teacherPane);
+			parent_container.getChildren().addAll(reviewPane, repartitionPane, uePane, teacherPane, yearPane, groupPane);
 			
-			toFront(homePane, teacherPane, uePane, repartitionPane, reviewPane);
+			toFront(homePane, teacherPane, uePane, repartitionPane, reviewPane, yearPane, groupPane);
     	} catch(IOException e) {
     		e.printStackTrace();
     	}
@@ -77,23 +85,31 @@ public class HomeController implements Initializable {
     private void handleClicks(ActionEvent event) throws IOException {
     	if(event.getSource() == homeBtn) {
 //    		load();
-    		toFront(homePane, teacherPane, uePane, repartitionPane, reviewPane);
+    		toFront(homePane, teacherPane, uePane, repartitionPane, reviewPane, yearPane, groupPane);
     	}
     	if(event.getSource() == teacherBtn) {
 //    		load();
-    		toFront(teacherPane, uePane, homePane, repartitionPane, reviewPane);
+    		toFront(teacherPane, uePane, homePane, repartitionPane, reviewPane,  yearPane, groupPane);
     	}
     	if(event.getSource() == ueBtn) {
 //			load();
-    		toFront(uePane, homePane, teacherPane, repartitionPane, reviewPane);
+    		toFront(uePane, homePane, teacherPane, repartitionPane, reviewPane, yearPane, groupPane);
     	}
     	if(event.getSource() == repartitionBtn) {    	
 //			load();
-    		toFront(repartitionPane, homePane, teacherPane, uePane, reviewPane);
+    		toFront(repartitionPane, homePane, teacherPane, uePane, reviewPane, yearPane, groupPane);
     	}
     	if(event.getSource() == reviewBtn) {
 //			load();
-    		toFront(reviewPane, homePane, teacherPane, uePane, repartitionPane);
+    		toFront(reviewPane, homePane, teacherPane, uePane, repartitionPane,  yearPane, groupPane);
+    	}
+    	if(event.getSource() == yearBtn) {
+//			load();
+    		toFront(yearPane, reviewPane, homePane, teacherPane, uePane, repartitionPane, groupPane);
+    	}
+    	if(event.getSource() == groupBtn) {
+//			load();
+    		toFront(groupPane, reviewPane, homePane, teacherPane, uePane, repartitionPane, yearPane);
     	}
     }
     

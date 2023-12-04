@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="765.0" stylesheets="@../application/light.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.YearPaneController">
+	   <children>
+	      <Label layoutX="14.0" layoutY="14.0" text="GESTION - ANNEE : ENREGISTREMENT" textFill="#a84d66">
+	         <font>
+	            <Font name="SimSun" size="18.0" />
+	         </font>
+	      </Label>
+      <VBox alignment="CENTER" layoutX="14.0" layoutY="63.0" prefHeight="134.0" prefWidth="600.0" spacing="19.0">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <StackPane fx:id="stackField1" alignment="CENTER_LEFT" prefHeight="50.0">
+                     <children>
+                        <TextField fx:id="libelleField" alignment="CENTER" prefHeight="30.0" prefWidth="300.0" promptText="LIBELLE ANNEE ACADEMIQUE">
+                           <font>
+                              <Font name="SimSun" size="14.0" />
+                           </font>
+                        </TextField>
+                        <Label alignment="CENTER" text="LIBELLE ANNEE ACADEMIQUE" textFill="#999999" visible="false">
+                           <font>
+                              <Font name="SimSun" size="14.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox layoutX="216.0" layoutY="245.0" spacing="10.0">
+         <children>
+            <Label text="LISTE - ANNEE">
+               <font>
+                  <Font name="SimSun" size="18.0" />
+               </font>
+            </Label>
+            <Label text="NOMBRE TOTAL DES ANNEES" textFill="#a45a47">
+               <font>
+                  <Font name="SimSun" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <TableView fx:id="yearTableView" layoutX="233.0" layoutY="284.0" prefHeight="246.0" prefWidth="300.0">
+        <columns>
+            <TableColumn fx:id="libelleColumn" editable="false" prefWidth="-1.0" text="Libelle" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <VBox alignment="CENTER" layoutX="614.0" layoutY="74.0" spacing="20.0">
+         <children>
+            <JFXButton onAction="#addBtn" prefWidth="101.0" ripplerFill="WHITE" style="-fx-background-color: #2d75e8; -fx-text-fill: #fff;" text="AJOUTER">
+               <font>
+                  <Font name="SimSun" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton onAction="#updateBtn" prefWidth="101.0" ripplerFill="WHITE" style="-fx-background-color: #25bfbb; -fx-text-fill: #fff;" text="MODIFIER">
+               <font>
+                  <Font name="SimSun" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton onAction="#deleteBtn" prefWidth="101.0" ripplerFill="WHITE" style="-fx-background-color: #fc7499; -fx-text-fill: #fff;" text="SUPPRIMER">
+               <font>
+                  <Font name="SimSun" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </VBox>
+      <Circle fill="#f94344" layoutX="737.0" layoutY="24.0" radius="14.0" stroke="WHITE" strokeType="INSIDE" />
+      <Label fx:id="lblClose" alignment="CENTER" layoutX="723.0" layoutY="16.0" prefHeight="17.0" prefWidth="28.0" text="X" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

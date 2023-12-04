@@ -4,12 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
 
 import javafx.collections.FXCollections;
-import models.Group;
-import models.UE;
-import models.Year;
 
 
 public class GenericEntity <E> {
@@ -61,17 +57,5 @@ public class GenericEntity <E> {
 	@SuppressWarnings("unchecked")
 	public List<E> all() {
 		return FXCollections.observableArrayList(entityManager.createQuery("SELECT t FROM " + this.entityClass.getSimpleName() + " t").getResultList());
-	}
-	
-	public Group getGroupByYearAndUe(UE ue, Year year) {
-		TypedQuery<Group> query = entityManager.createQuery(
-			    "SELECT g FROM Group g WHERE g.ue = :ue AND g.year = :year",
-			    Group.class
-		);
-
-		query.setParameter("ue", ue);
-		query.setParameter("year", year); 
-		return query.getResultList().get(0);
-	}
-	
+	}	
 }
