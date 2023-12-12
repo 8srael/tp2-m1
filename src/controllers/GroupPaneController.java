@@ -1,8 +1,6 @@
 package controllers;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
@@ -85,7 +83,8 @@ public class GroupPaneController implements Initializable {
     private Label lblClose;
 
     private Alert alert;
-    private List<StackPane> stackFields = new ArrayList<>();
+//    private List<StackPane> stackFields = new ArrayList<>();
+    private CombinedDataGroup selectedGroup;
 	 
 	ObservableList<CombinedDataGroup> combinedDataObsList = FXCollections.observableArrayList();
 
@@ -111,6 +110,7 @@ public class GroupPaneController implements Initializable {
 		
 		
 		yearCombo.getSelectionModel().selectedItemProperty().addListener((obs, old, neww) -> {
+			ueCombo.getSelectionModel().clearSelection();
 			if(neww != null) {
 				System.out.println(neww.getLabel());
 				yearLabel.setText(neww.getLabel());
@@ -119,6 +119,21 @@ public class GroupPaneController implements Initializable {
 				tableViewData(neww);
 				groupTableView.setItems(combinedDataObsList);
 				
+			}
+		});
+		
+		groupTableView.getSelectionModel().selectedItemProperty().addListener((obs, old, neww) -> {
+			
+			if(obs != null)
+				selectedGroup = obs.getValue();
+			
+			if(selectedGroup != null) {
+				gcmField.setText(selectedGroup.getNGroupsCM() + "");
+				gtdField.setText(selectedGroup.getNGroupsTD() + "");
+				gtpField.setText(selectedGroup.getNGroupsTP() + "");
+				
+				yearCombo.setValue(selectedGroup.getGroup().getYear());
+				ueCombo.setValue(selectedGroup.getGroup().getUe());
 			}
 		});
 	}
@@ -152,21 +167,79 @@ public class GroupPaneController implements Initializable {
 
     @FXML
     void deleteBtn() {
-    	
+    	if(selectedGroup == null) {
+    		alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("DELETE WARNING");
+    		alert.setContentText("No row selected !\nPlease select a row 👤");
+    		alert.show();
+    	} else {
+    		Utils.getGroupEntity().delete(selectedGroup.getGroup().getId());
+    		combinedDataObsList.remove(selectedGroup);
+    		alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Group delete information".toUpperCase());
+			alert.setContentText("Group deleted successfully");
+			alert.show();
+			
+			clearControls();
+    	}
     }
 
     @FXML
     void updateBtn() {
+    	
+    	if (selectedGroup == null) {
+    		alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("UPDATE WARNING");
+    		alert.setContentText("No row selected !\nPlease select a row 👤");
+    		alert.show();
+    	} else {
+    		    		
+    		if(gcmField.getText().length() != 0 && gtdField.getText().length() != 0 && gtpField.getText().length() != 0
+    				 && !ueCombo.getSelectionModel().isEmpty() && !yearCombo.getSelectionModel().isEmpty()) {
+	    		selectedGroup.getGroup().setnGroupsCM(Integer.parseInt(gcmField.getText()));
+	    		selectedGroup.getGroup().setnGroupsTD(Integer.parseInt(gtdField.getText()));
+	    		selectedGroup.getGroup().setnGroupsTP(Integer.parseInt(gtpField.getText()));
+	    		
+	    		Group group = Utils.getGroupEntity().update(selectedGroup.getGroup());
+	    		
+	    		CombinedDataGroup cdg = new CombinedDataGroup();
+	    		cdg.setCode(group.getUe().getCode());
+	    		cdg.setLabel(group.getUe().getLabel());
+	      		cdg.setNHoursCM(group.getUe().getNHoursCM());
+	      		cdg.setNHoursTD(group.getUe().getNHoursTD());
+	      		cdg.setNHoursTP(group.getUe().getNHoursTP());
+	      		cdg.setNGroupsCM(group.getnGroupsCM());
+	      		cdg.setNGroupsTD(group.getnGroupsTD());
+	      		cdg.setNGroupsTP(group.getnGroupsTP());
+	      		cdg.setGroup(group);
+	 
+   			 	combinedDataObsList.set(combinedDataObsList.indexOf(selectedGroup), cdg);
+	    		
+	    		gcmField.setText("0");
+	    		gtdField.setText("0");
+	    		gtpField.setText("0");
+	    		
+				ueCombo.getSelectionModel().clearSelection();
+	    		
+    		}
+    		
+    		alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("update information".toUpperCase());
+			alert.setContentText("Group updated successfully");
+			alert.show();
+    	}
 
     }
 
     private void clearControls() {
-		yearCombo.getSelectionModel().clearSelection();
+//		yearCombo.getSelectionModel().clearSelection();
 		ueCombo.getSelectionModel().clearSelection();
 
 		gcmField.setText("0");
 		gtdField.setText("0");
 		gtpField.setText("0");
+		
+		groupTableView.getSelectionModel().clearSelection();
 		
 		yearLabel.setText("ANNEE ACADEMIQUE	");
 	 }
@@ -175,7 +248,6 @@ public class GroupPaneController implements Initializable {
     private void tableViewData(Year year) {
     	groupTableView.getItems().clear();	
     	for(Group group: year.getGroups()) {
-    		System.out.println(group.getUe().getLabel());
     		addCombinedData(group);
     	}
     }
@@ -190,6 +262,7 @@ public class GroupPaneController implements Initializable {
 	    combinedData.setNGroupsCM(group.getnGroupsCM());
 	    combinedData.setNGroupsTD(group.getnGroupsTD());
 	    combinedData.setNGroupsTP(group.getnGroupsTP());
+	    combinedData.setGroup(group);
 	    combinedDataObsList.add(combinedData);
 	}
 }

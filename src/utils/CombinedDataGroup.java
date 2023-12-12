@@ -1,5 +1,6 @@
 package utils;
 
+import models.Group;
 
 public class CombinedDataGroup {
     private String code;
@@ -10,11 +11,14 @@ public class CombinedDataGroup {
     private int nGroupsCM;
     private int nGroupsTD;
     private int nGroupsTP;
+    private Group group;
 
     
     public CombinedDataGroup() {}
     
-    public CombinedDataGroup(String code, String label, int nHoursCM, int nHoursTD, int nHoursTP, int nGroupsCM, int nGroupsTD, int nGroupsTP) {
+   
+
+	public CombinedDataGroup(String code, String label, int nHoursCM, int nHoursTD, int nHoursTP, int nGroupsCM, int nGroupsTD, int nGroupsTP) {
         this.code = code;
         this.label = label;
         this.nHoursCM = nHoursCM;
@@ -87,6 +91,14 @@ public class CombinedDataGroup {
 
 	public void setNGroupsTP(int nGroupsTP) {
 		this.nGroupsTP = nGroupsTP;
+	}
+	
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 	
 	

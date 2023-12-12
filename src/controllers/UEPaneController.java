@@ -64,6 +64,8 @@ public class UEPaneController implements Initializable {
 
     @FXML
     private Label lblClose;
+    
+    private UE selectedUE;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -74,6 +76,17 @@ public class UEPaneController implements Initializable {
 		htpColumn.setCellValueFactory(new PropertyValueFactory<>("nHoursTP"));
 
 		ueTableView.setItems(Utils.getObsListUE());
+		
+		ueTableView.getSelectionModel().selectedItemProperty().addListener((obs, old, neww) -> {
+			selectedUE = obs.getValue();
+    		if(selectedUE != null) {
+    			codeField.setText(selectedUE.getCode());
+    			libelleField.setText(selectedUE.getLabel());
+	    		hcmField.setText(selectedUE.getNHoursCM() + "");
+	    		htdField.setText(selectedUE.getNHoursTD() + "");
+	    		htpField.setText(selectedUE.getNHoursTP() + "");
+    		}
+		});
 		
 	}
 	
@@ -110,12 +123,61 @@ public class UEPaneController implements Initializable {
 
 	@FXML
     void deleteBtn() {
-
+		if (selectedUE == null) {
+    		alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("DELETE WARNING");
+    		alert.setContentText("No UE selected !\nPlease select an UE 👤");
+    		alert.show();
+    	} else {
+    		System.out.println(selectedUE);
+    		Utils.getUeEntity().delete(selectedUE.getId());
+    		
+    		Utils.getObsListUE().remove(selectedUE);
+    		alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("UE delete information".toUpperCase());
+			alert.setContentText("UE deleted successfully");
+			alert.show();
+			
+			clearControls();
+			ueTableView.getSelectionModel().clearSelection();
+    	}
     }
 
     @FXML
     void updateBtn() {
+    	if (selectedUE == null) {
+    		alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("UPDATE WARNING");
+    		alert.setContentText("No UE selected !\nPlease select an UE 👤");
+    		alert.show();
+    	} else {
+    		System.out.println(selectedUE);
+    		if(!codeField.getText().isEmpty() && !libelleField.getText().isEmpty() &&
+    				!hcmField.getText().isEmpty() && !htpField.getText().isEmpty() && !htdField.getText().isEmpty()) {
+   			 	
+    			selectedUE.setCode(codeField.getText());
+    			selectedUE.setLabel(libelleField.getText());
+    			selectedUE.setNHoursCM(Integer.parseInt(hcmField.getText()));
+    			selectedUE.setNHoursTD(Integer.parseInt(htdField.getText()));
+    			selectedUE.setNHoursTP(Integer.parseInt(htpField.getText()));
 
+   			 	// update the updating person instance in observableList of person 
+   			 	Utils.getObsListUE().set(Utils.getObsListUE().indexOf(selectedUE), Utils.getUeEntity().update(selectedUE));
+   				hcmField.setText("");
+   				htpField.setText("");
+   				htdField.setText("");
+   				codeField.setText("");
+   				libelleField.setText("");
+   				// Removes the focus on the updated person
+   	    		ueTableView.getSelectionModel().clearSelection();
+   			 	
+    		}
+    		
+    		alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("UE update information".toUpperCase());
+			alert.setContentText("UE updated successfully");
+			alert.show();
+    	}
     }
 
 }

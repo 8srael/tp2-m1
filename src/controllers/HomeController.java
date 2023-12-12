@@ -5,6 +5,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,8 +62,7 @@ public class HomeController implements Initializable {
     	System.out.println(LocalDate.now());
     	allTeacherLabel.setText(Utils.getObsListTeacher().size() + "");
 
-    	allUeLabel.setText(Utils.getObsListTeacher().size() + "");
-    	
+    	allUeLabel.setText(Utils.getObsListTeacher().size() + "");    	
     	
     	// fxml files loading
     	try {

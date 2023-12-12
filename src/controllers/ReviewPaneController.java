@@ -66,6 +66,7 @@ public class ReviewPaneController implements Initializable {
 		
 		yearCombo.getSelectionModel().selectedItemProperty().addListener((obsY, oldY, newY)->{
 			teacherCombo.getSelectionModel().clearSelection();
+			reviewTableview.getItems().clear();
 			fullNameLabel.setText("");
 			teacherCombo.getSelectionModel().selectedItemProperty().addListener((obsT, oldT, newT)->{
 				if(newT != null) {

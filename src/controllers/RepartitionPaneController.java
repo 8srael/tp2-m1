@@ -258,7 +258,8 @@ public class RepartitionPaneController implements Initializable {
     		
     		System.out.println(selectedCDA.getTuy().getTeacher().getFirstName());
     		
-    		if(cmField.getText().length() != 0 && tdField.getText().length() != 0 && tpField.getText().length() != 0) {
+    		if(cmField.getText().length() != 0 && tdField.getText().length() != 0 && tpField.getText().length() != 0
+    			&& !teacherCombo.getSelectionModel().isEmpty() && !ueCombo.getSelectionModel().isEmpty() && !yearCombo.getSelectionModel().isEmpty()) {
 	    		selectedCDA.getTuy().setNHoursCMAss(Integer.parseInt(cmField.getText()));
 	    		selectedCDA.getTuy().setNHoursTDAss(Integer.parseInt(tdField.getText()));
 	    		selectedCDA.getTuy().setNHoursTPAss(Integer.parseInt(tpField.getText()));
