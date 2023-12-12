@@ -103,6 +103,8 @@ public class RepartitionPaneController implements Initializable {
     
     @FXML
     private TableView<CombinedDataAttribution> recapTableView;
+    
+    private CombinedDataAttribution selectedCDA;
 
 
 	// Entities ObservableList
@@ -114,10 +116,6 @@ public class RepartitionPaneController implements Initializable {
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	
-//    	if(teacherCombo.getSelectionModel().isEmpty())
-//			already.setStyle("-fx-fill : #ffffff; -fx-stroke : #ffffff");
-    		
 		System.out.println(stackFieldCM.getChildren().get(0));
 		
 		// Combo Data
@@ -125,28 +123,35 @@ public class RepartitionPaneController implements Initializable {
 		ueCombo.setItems(Utils.getObsListUE());
 		yearCombo.setItems(Utils.getObsListYear());
 		
-		labelCenter(leftCmLabel, leftTdLabel, leftTpLabel, middleCmLabel, middleTdLabel, middleTpLabel, rightCmLabel, rightTdLabel, rightTpLabel);
+		Utils.labelCenter(leftCmLabel, leftTdLabel, leftTpLabel, middleCmLabel, middleTdLabel, middleTpLabel, rightCmLabel, rightTdLabel, rightTpLabel);
 				
 		
 		yearCombo.getSelectionModel().selectedItemProperty().addListener((obsY, oldY, newY) -> {
+			ueCombo.getSelectionModel().clearSelection();
+			teacherCombo.getSelectionModel().clearSelection();
+			clearLabels();
 			if(newY != null) {
 				System.out.println("In uecombo listener " + combinedDataObsList);
 				recapTableView.setItems(combinedDataObsList);
 					
 				ueCombo.getSelectionModel().selectedItemProperty().addListener((obsU, oldU, newU) -> {
+					teacherCombo.getSelectionModel().clearSelection();
 					tableViewData(newU, newY);
 					
 					Group group = Utils.getGroupByYearAndUe(newU, newY);
+					
+					if(group != null)
+						System.out.println(group.getUe().getLabel() + "\t" + group.getYear().getLabel());
 										
 					getLabelData(group);
 					
 					// check assignation of a teacher
 					teacherCombo.getSelectionModel().selectedItemProperty().addListener((obsT, oldT, newT)-> {
-						if(Utils.checkAssigned(newY, newU, newT)) {
+						
+						if(Utils.checkAssigned(newY, newU, newT))
 							already.setStyle("-fx-fill : #ff0000; -fx-stroke : #ff0000");
-						} else { 
+						 else 
 							already.setStyle("-fx-fill : #00ff00; -fx-stroke : #00ff00");
-						}
 						
 						if(teacherCombo.getSelectionModel().isEmpty())
 							already.setStyle("-fx-fill : #ffffff; -fx-stroke : #ffffff");
@@ -164,6 +169,18 @@ public class RepartitionPaneController implements Initializable {
 		cmColumn.setCellValueFactory(new PropertyValueFactory<>("nHoursCMAss"));
 		tdColumn.setCellValueFactory(new PropertyValueFactory<>("nHoursTDAss"));
 		tpColumn.setCellValueFactory(new PropertyValueFactory<>("nHoursTPAss"));
+		
+		recapTableView.getSelectionModel().selectedItemProperty().addListener((obs, old, neww) -> {
+			selectedCDA = obs.getValue();
+			if(selectedCDA != null) {
+				teacherCombo.setValue(selectedCDA.getTuy().getTeacher());
+				cmField.setText(String.valueOf(selectedCDA.getNHoursCMAss()));
+				tdField.setText(String.valueOf(selectedCDA.getNHoursTDAss()));
+				tpField.setText(String.valueOf(selectedCDA.getNHoursTPAss()));
+
+			}
+		});
+		
 		
 	}
 
@@ -211,45 +228,91 @@ public class RepartitionPaneController implements Initializable {
 
     @FXML
     void deleteBtn() {
-
+    	if(selectedCDA == null) {
+    		alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("DELETE WARNING");
+    		alert.setContentText("No row selected !\nPlease select a row 👤");
+    		alert.show();
+    	} else {
+    		Utils.getTuyEntity().delete(selectedCDA.getTuy().getId());
+    		combinedDataObsList.remove(selectedCDA);
+    		alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Attribution delete information".toUpperCase());
+			alert.setContentText("Attribution deleted successfully");
+			alert.show();
+			
+			teacherCombo.getSelectionModel().clearSelection();
+			clearControls();
+    	}
+    	
     }
 
     @FXML
     void updateBtn() {
+    	if (selectedCDA == null) {
+    		alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("UPDATE WARNING");
+    		alert.setContentText("No row selected !\nPlease select a row 👤");
+    		alert.show();
+    	} else {
+    		
+    		System.out.println(selectedCDA.getTuy().getTeacher().getFirstName());
+    		
+    		if(cmField.getText().length() != 0 && tdField.getText().length() != 0 && tpField.getText().length() != 0) {
+	    		selectedCDA.getTuy().setNHoursCMAss(Integer.parseInt(cmField.getText()));
+	    		selectedCDA.getTuy().setNHoursTDAss(Integer.parseInt(tdField.getText()));
+	    		selectedCDA.getTuy().setNHoursTPAss(Integer.parseInt(tpField.getText()));
+	    		
+	    		Teacher_UE_Year tuyModified = Utils.getTuyEntity().update(selectedCDA.getTuy());
+	    		
+	    		CombinedDataAttribution cda = new CombinedDataAttribution();
+	    		cda.setFullName(tuyModified.getTeacher().getFirstName(), tuyModified.getTeacher().getLastName());
+	      		cda.setNHoursCMAss(tuyModified.getNHoursCMAss());
+	      		cda.setNHoursTDAss(tuyModified.getNHoursTDAss());
+	      		cda.setNHoursTPAss(tuyModified.getNHoursTPAss());
+	      		cda.setTuy(tuyModified);
+	 
+   			 	combinedDataObsList.set(combinedDataObsList.indexOf(selectedCDA), cda);
+	    		
+	    		cmField.setText("0");
+	    		tdField.setText("0");
+	    		tpField.setText("0");
+	    		
+				getLabelData(Utils.getGroupByYearAndUe(tuyModified.getUe(), tuyModified.getYear()));
+				teacherCombo.getSelectionModel().clearSelection();
 
+	    		
+    		}
+    		
+    		alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("update information".toUpperCase());
+			alert.setContentText("Attribution updated successfully");
+			alert.show();
+    	}
     }
     
     private void tableViewData(UE ue, Year year) {
     	this.recapTableView.getItems().clear();
     	if(year != null && ue != null) {
 			for( Teacher_UE_Year tuy: Utils.getTuyByYearAndUe(ue, year)) {
-	    		System.out.println(year.getTeacher_UE_Years());
+	    		System.out.println(tuy.getUe().getLabel() + "\t" + tuy.getYear().getLabel() + "koundjadjo");
 				addCombinedData(tuy);
 			}
-			
 			System.out.println(combinedDataObsList);
     	}
     }
     
-    private void labelCenter(Label ...labels) {
-    	for(Label label: labels) {
-//    		System.out.println(label.getText().length());
-    		if(label.getText().length() == 1)
-    			label.setLayoutX(24);
-    		else
-    			label.setLayoutX(20);
-    	}
-    }
+    
     
     
     // add a element in combinesData
     private void addCombinedData(Teacher_UE_Year tuy) {
   		CombinedDataAttribution combinedData = new CombinedDataAttribution();
-  		System.out.println("In add combined data");
   		combinedData.setFullName(tuy.getTeacher().getFirstName(), tuy.getTeacher().getLastName());
   		combinedData.setNHoursCMAss(tuy.getNHoursCMAss());
   		combinedData.setNHoursTDAss(tuy.getNHoursTDAss());
   		combinedData.setNHoursTPAss(tuy.getNHoursTPAss());
+  		combinedData.setTuy(tuy);
   		
   		System.out.println("Combine data list before : " +combinedDataObsList);
   	    combinedDataObsList.add(combinedData);
@@ -272,7 +335,7 @@ public class RepartitionPaneController implements Initializable {
       
     }
     
-    public void clearControls() {
+    private void clearControls() {
     	cmField.setText("0");
     	tdField.setText("0");
     	tpField.setText("0");
@@ -317,26 +380,30 @@ public class RepartitionPaneController implements Initializable {
 			rightTpLabel.setText(totalTP - getSumAttributionHoursByUE(group.getUe())[2] + "");
 			
 			
-			labelCenter(leftCmLabel, leftTdLabel, leftTpLabel, middleCmLabel, middleTdLabel, middleTpLabel, rightCmLabel, rightTdLabel, rightTpLabel);
+			Utils.labelCenter(leftCmLabel, leftTdLabel, leftTpLabel, middleCmLabel, middleTdLabel, middleTpLabel, rightCmLabel, rightTdLabel, rightTpLabel);
 		}
     	
     	else {
-    		// CM,TD,TP par crew
-			leftCmLabel.setText("0");
-			leftTdLabel.setText("0");
-			leftTpLabel.setText("0");
-			
-			// CM, TD, TP total
-			middleCmLabel.setText("0");
-			middleTdLabel.setText("0");
-			middleTpLabel.setText("0");
-			
-			
-			// CM, TD, TP Reste à distribuer
-			rightCmLabel.setText("0");
-			rightTdLabel.setText("0");
-			rightTpLabel.setText("0");
-			labelCenter(leftCmLabel, leftTdLabel, leftTpLabel, middleCmLabel, middleTdLabel, middleTpLabel, rightCmLabel, rightTdLabel, rightTpLabel);
+    		clearLabels();
+			Utils.labelCenter(leftCmLabel, leftTdLabel, leftTpLabel, middleCmLabel, middleTdLabel, middleTpLabel, rightCmLabel, rightTdLabel, rightTpLabel);
     	}
+    }
+    
+    private void clearLabels() {
+    	// CM,TD,TP par crew
+		leftCmLabel.setText("0");
+		leftTdLabel.setText("0");
+		leftTpLabel.setText("0");
+		
+		// CM, TD, TP total
+		middleCmLabel.setText("0");
+		middleTdLabel.setText("0");
+		middleTpLabel.setText("0");
+		
+		
+		// CM, TD, TP Reste à distribuer
+		rightCmLabel.setText("0");
+		rightTdLabel.setText("0");
+		rightTpLabel.setText("0");
     }
 }

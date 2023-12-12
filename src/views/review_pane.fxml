@@ -1,6 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
 
-<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="765.0" style="-fx-background-color: #2a73ff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReviewPaneController" />
+<Pane prefHeight="530.0" prefWidth="765.0" style="-fx-background-color: #fff;" stylesheets="@../application/light.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReviewPaneController">
+   <children>
+      <JFXComboBox fx:id="teacherCombo" layoutX="258.0" layoutY="59.0" prefWidth="250.0" promptText="CHOISIR UN ENSEIGNANT" unFocusColor="#fa5e7e" />
+      <Label layoutX="14.0" layoutY="20.0" text="BILAN" textFill="#a84d66">
+         <font>
+            <Font name="SimSun" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="fullNameLabel" layoutX="80.0" layoutY="20.0" textFill="#4c63a6">
+         <font>
+            <Font name="SimSun" size="18.0" />
+         </font>
+      </Label>
+      <HBox layoutX="212.0" layoutY="117.0">
+         <children>
+            <VBox>
+               <children>
+                  <Label alignment="CENTER" text="HEURES CM" textAlignment="CENTER">
+                     <font>
+                        <Font name="SimSun-ExtB" size="14.0" />
+                     </font>
+                     <graphic>
+                        <Pane>
+                           <children>
+                              <Circle fill="#2a73ff" layoutX="28.0" layoutY="20.0" radius="20.0" stroke="#2a73ff" strokeType="INSIDE" />
+                              <Label fx:id="totalCMLabel" alignment="CENTER" layoutX="24.0" layoutY="12.0" text="0" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="SimSun-ExtB" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </graphic>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label alignment="CENTER" text="HEURES TD" textAlignment="CENTER">
+                     <font>
+                        <Font name="SimSun-ExtB" size="14.0" />
+                     </font>
+                     <graphic>
+                        <Pane>
+                           <children>
+                              <Circle fill="#fa5e7e" layoutX="28.0" layoutY="20.0" radius="20.0" stroke="#fa5e7e" strokeType="INSIDE" />
+                              <Label fx:id="totalTDLabel" alignment="CENTER" layoutX="24.0" layoutY="12.0" text="0" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="SimSun-ExtB" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </graphic>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label alignment="CENTER" text="HEURES TP" textAlignment="CENTER">
+                     <font>
+                        <Font name="SimSun-ExtB" size="14.0" />
+                     </font>
+                     <graphic>
+                        <Pane>
+                           <children>
+                              <Circle fill="#25bfbb" layoutX="28.0" layoutY="20.0" radius="20.0" stroke="#25bfbb" strokeType="INSIDE" />
+                              <Label fx:id="totalTPLabel" alignment="CENTER" layoutX="24.0" layoutY="12.0" text="0" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="SimSun-ExtB" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </graphic>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <TableView fx:id="reviewTableview" layoutX="34.0" layoutY="255.0" prefHeight="275.0" prefWidth="700.0">
+        <columns>
+          <TableColumn fx:id="ueColumn" prefWidth="300.0" text="UNITE D ENSEIGNEMENT" />
+            <TableColumn prefWidth="400.0" text="TOTAUX DES TOUTES LES HEURES">
+               <columns>
+                <TableColumn fx:id="cmColumn" prefWidth="132.0" text="COURS MAGISTRAUX" />
+                  <TableColumn fx:id="tdColumn" prefWidth="132.0" text="TRAVAUX DIRIGES" />
+                  <TableColumn fx:id="tpColumn" prefWidth="132.0" text="TRAVAUX PRATIQUES" />
+               </columns>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <JFXComboBox fx:id="yearCombo" layoutX="584.0" layoutY="19.0" prefWidth="150.0" promptText="CHOISIR UNE ANNEE" unFocusColor="#fa5e7e" />
+   </children>
+</Pane>

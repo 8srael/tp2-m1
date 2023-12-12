@@ -155,13 +155,13 @@
                               <Font name="SimSun-ExtB" size="15.0" />
                            </font>
                         </Label>
-                        <HBox alignment="CENTER_LEFT" layoutX="100.0" layoutY="238.0" spacing="50.0">
+                        <HBox alignment="CENTER" layoutX="212.0" layoutY="238.0" spacing="100.0">
                            <children>
                               <VBox alignment="CENTER">
                                  <children>
-                                    <Label text="22000" textFill="#1cbabf">
+                                    <Label fx:id="allTeacherLabel" textFill="#1cbabf">
                                        <font>
-                                          <Font name="System Bold" size="26.0" />
+                                          <Font name="System Bold" size="40.0" />
                                        </font>
                                     </Label>
                                     <Label text="Enseignants">
@@ -173,40 +173,12 @@
                               </VBox>
                               <VBox alignment="CENTER">
                                  <children>
-                                    <Label text="1500" textFill="#fa5e7e">
+                                    <Label fx:id="allUeLabel" textFill="#fa5e7e">
                                        <font>
-                                          <Font name="System Bold" size="26.0" />
+                                          <Font name="System Bold" size="40.0" />
                                        </font>
                                     </Label>
                                     <Label text="Unités d'enseignement">
-                                       <font>
-                                          <Font name="SimSun-ExtB" size="15.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER">
-                                 <children>
-                                    <Label text="1000" textFill="#b642c3">
-                                       <font>
-                                          <Font name="System Bold" size="26.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Peding Orders">
-                                       <font>
-                                          <Font name="SimSun-ExtB" size="15.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER">
-                                 <children>
-                                    <Label text="780" textFill="#de0000">
-                                       <font>
-                                          <Font name="System Bold" size="26.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Orders on Hold">
                                        <font>
                                           <Font name="SimSun-ExtB" size="15.0" />
                                        </font>

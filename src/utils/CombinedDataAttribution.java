@@ -1,11 +1,14 @@
 package utils;
 
+import models.Teacher_UE_Year;
+
 public class CombinedDataAttribution {
 	
 	private String fullName;
 	private int nHoursCMAss;
 	private int nHoursTDAss;
-	int nHoursTPAss;
+	private int nHoursTPAss;
+	private Teacher_UE_Year tuy;
 
 	public CombinedDataAttribution() {}
 
@@ -39,6 +42,14 @@ public class CombinedDataAttribution {
 
 	public void setNHoursTPAss(int nHoursTPAss) {
 		this.nHoursTPAss = nHoursTPAss;
+	}
+	
+	public Teacher_UE_Year getTuy() {
+		return tuy;
+	}
+
+	public void setTuy(Teacher_UE_Year tuy) {
+		this.tuy = tuy;
 	}
 	
 	

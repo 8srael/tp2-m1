@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import models.Group;
 import models.Teacher;
 import models.Teacher_UE_Year;
@@ -111,5 +112,45 @@ public class Utils {
 		 		 
 		 return (query.getResultList().size() == 0) ? false : true ;
 	}
+	
+	public static Teacher_UE_Year getTUYByTeacherUEandYear(Year year, UE ue, Teacher teacher) {
+		TypedQuery<Teacher_UE_Year> query = entityManager.createQuery(
+		        "SELECT t FROM Teacher_UE_Year t WHERE t.ue = :ue AND t.year = :year AND t.teacher = :teacher", Teacher_UE_Year.class);
+		 query.setParameter("ue", ue);
+		 query.setParameter("year", year);
+		 query.setParameter("teacher", teacher);
+		 		 
+		 return query.getSingleResult();
+	}
+	
+	
+	public static List<Teacher_UE_Year> getTuyByTeacherAndYear(Teacher teacher, Year year) {
+	    TypedQuery<Teacher_UE_Year> query = entityManager.createQuery(
+	        "SELECT t FROM Teacher_UE_Year t WHERE t.teacher = :teacher and t.year = :year", Teacher_UE_Year.class);
+	    query.setParameter("teacher", teacher);
+	    query.setParameter("year", year);
 
+	    return query.getResultList();
+	}
+	
+	public static Object[] getSum(Teacher teacher, Year year) {	
+		TypedQuery<Object[]> query = entityManager.createQuery(
+		        "SELECT SUM(t.nHoursCMAss), SUM(t.nHoursTDAss), SUM(t.nHoursTPAss) FROM Teacher_UE_Year t WHERE t.teacher = :teacher AND t.year = :year", Object[].class);
+		
+		query.setParameter("teacher", teacher);
+		query.setParameter("year", year);
+		
+		return query.getSingleResult();
+		
+	}
+	
+	public static void labelCenter(Label ...labels) {
+    	for(Label label: labels) {
+//    		System.out.println(label.getText().length());
+    		if(label.getText().length() == 1)
+    			label.setLayoutX(24);
+    		else
+    			label.setLayoutX(20);
+    	}
+    }
 }

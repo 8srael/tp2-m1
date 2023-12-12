@@ -5,8 +5,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import javax.persistence.EntityManager;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,9 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import models.Year;
-import utils.GenericEntity;
-import utils.JPAUtil;
+import utils.Utils;
 
 public class HomeController implements Initializable {
 	@FXML
@@ -49,18 +45,24 @@ public class HomeController implements Initializable {
     
     @FXML
     private Label yearLabel;
+    
+    @FXML
+    private Label allTeacherLabel;
 
-    private EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	private GenericEntity<Year> yearEntity = new GenericEntity<>(entityManager, Year.class);
+    @FXML
+    private Label allUeLabel;
+
+
     
     private Pane teacherPane, uePane, repartitionPane, reviewPane, yearPane, groupPane;
 	
     @Override
-    public void initialize(URL location, ResourceBundle resources) {	
-    	
-    	
+    public void initialize(URL location, ResourceBundle resources) {	    
     	System.out.println(LocalDate.now());
+    	allTeacherLabel.setText(Utils.getObsListTeacher().size() + "");
 
+    	allUeLabel.setText(Utils.getObsListTeacher().size() + "");
+    	
     	
     	// fxml files loading
     	try {
