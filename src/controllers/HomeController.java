@@ -5,7 +5,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import javafx.beans.binding.Bindings;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +52,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private Label allUeLabel;
+    
+    @FXML
+    private Label closeCircle;
 
 
     
@@ -81,6 +84,9 @@ public class HomeController implements Initializable {
     	} catch(IOException e) {
     		e.printStackTrace();
     	}
+    	
+    	// close button action
+    	closeCircle.setOnMouseClicked((e) -> Platform.exit());
     }
     
     @FXML
@@ -91,26 +97,33 @@ public class HomeController implements Initializable {
     	}
     	if(event.getSource() == teacherBtn) {
 //    		load();
+	    	teacherPane = FXMLLoader.load(getClass().getResource("/views/teacher_pane.fxml"));
+	    	parent_container.getChildren().add(teacherPane);
     		toFront(teacherPane, uePane, homePane, repartitionPane, reviewPane,  yearPane, groupPane);
     	}
     	if(event.getSource() == ueBtn) {
 //			load();
+			uePane = FXMLLoader.load(getClass().getResource("/views/ue_pane.fxml"));
     		toFront(uePane, homePane, teacherPane, repartitionPane, reviewPane, yearPane, groupPane);
     	}
     	if(event.getSource() == repartitionBtn) {    	
 //			load();
+			repartitionPane = FXMLLoader.load(getClass().getResource("/views/repartition_pane.fxml"));
     		toFront(repartitionPane, homePane, teacherPane, uePane, reviewPane, yearPane, groupPane);
     	}
     	if(event.getSource() == reviewBtn) {
 //			load();
+			reviewPane = FXMLLoader.load(getClass().getResource("/views/review_pane.fxml"));
     		toFront(reviewPane, homePane, teacherPane, uePane, repartitionPane,  yearPane, groupPane);
     	}
     	if(event.getSource() == yearBtn) {
 //			load();
+			yearPane = FXMLLoader.load(getClass().getResource("/views/year_pane.fxml"));
     		toFront(yearPane, reviewPane, homePane, teacherPane, uePane, repartitionPane, groupPane);
     	}
     	if(event.getSource() == groupBtn) {
 //			load();
+			groupPane = FXMLLoader.load(getClass().getResource("/views/group_pane.fxml"));
     		toFront(groupPane, reviewPane, homePane, teacherPane, uePane, repartitionPane, yearPane);
     	}
     }

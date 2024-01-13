@@ -114,25 +114,12 @@
                         <Insets bottom="5.0" left="40.0" top="5.0" />
                      </padding>
                   </Button>
-                  <Pane prefHeight="254.0" prefWidth="207.0">
+                  <Pane prefHeight="120.0" prefWidth="211.0">
                      <children>
-                        <Circle fx:id="shpActive" fill="WHITE" layoutX="53.0" layoutY="72.0" radius="7.0" stroke="#1cd95c" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="53.0" layoutY="104.0" radius="7.0" stroke="#d9c81c" strokeType="INSIDE" />
-                        <Circle fill="WHITE" layoutX="53.0" layoutY="134.0" radius="7.0" stroke="#da1c1c" strokeType="INSIDE" />
-                        <Line endX="-4.0" endY="-8.0" layoutX="34.0" layoutY="43.0" startX="148.0" startY="-8.0" stroke="#ddd1d1" />
-                        <Label fx:id="lblActive" layoutX="77.0" layoutY="65.0" text="10 Active" textFill="#4a4747">
+                        <Line endX="200.0" layoutX="3.0" layoutY="21.0" stroke="#ddd1d1" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="66.0" rotate="19.0" text="Powered by 8srael©" textFill="#7f7f7f">
                            <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblOffline" layoutX="77.0" layoutY="96.0" text="2 Offline" textFill="#4a4747">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblExp" layoutX="77.0" layoutY="126.0" text="8 Expired" textFill="#4a4747">
-                           <font>
-                              <Font size="11.0" />
+                              <Font name="Rage Italic" size="20.0" />
                            </font>
                         </Label>
                      </children>
@@ -188,7 +175,7 @@
                            </children>
                         </HBox>
                         <Circle fill="#f94344" layoutX="737.0" layoutY="24.0" radius="14.0" stroke="WHITE" strokeType="INSIDE" />
-                        <Label fx:id="lblClose" alignment="CENTER" layoutX="723.0" layoutY="16.0" prefHeight="17.0" prefWidth="28.0" text="X" textFill="WHITE">
+                        <Label fx:id="closeCircle" alignment="CENTER" layoutX="722.0" layoutY="16.0" prefHeight="17.0" prefWidth="28.0" text="X" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>

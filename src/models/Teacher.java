@@ -40,7 +40,7 @@ public class Teacher {
 	@Column(name = "grade", nullable = false, length = 100)
 	String grade;
 	
-	@OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "teacher")
 	private List<Teacher_UE_Year> teacher_ues_years = new ArrayList<Teacher_UE_Year>();
 	
 	public Teacher() {}

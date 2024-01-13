@@ -19,24 +19,24 @@ public class Teacher_UE_Year {
 	
 	@ManyToOne
 	@JoinColumn(name = "teacher_id")
-	Teacher teacher;
+	private Teacher teacher;
 	
 	@ManyToOne
 	@JoinColumn(name = "ue_id")
-	UE ue;
+	private UE ue;
 	
 	@ManyToOne
 	@JoinColumn(name = "year_id")
-	Year year;
+	private Year year; 
 	
 	@Column(name = "nHoursCMAss")
-	int nHoursCMAss;
+	private int nHoursCMAss;
 	
 	@Column(name = "nHoursTDAss")
-	int nHoursTDAss;
+	private int nHoursTDAss;
 	
 	@Column(name = "nHoursTPAss")
-	int nHoursTPAss;
+	private int nHoursTPAss;
 	
 	public Teacher_UE_Year() {}
 
