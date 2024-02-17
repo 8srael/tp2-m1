@@ -38,8 +38,6 @@ public class HomeController implements Initializable {
     @FXML
     private Button reviewBtn;
     
-    @FXML
-    private Pane homePane;
 
     @FXML
     private StackPane parent_container;
@@ -47,84 +45,74 @@ public class HomeController implements Initializable {
     @FXML
     private Label yearLabel;
     
-    @FXML
-    private Label allTeacherLabel;
-
-    @FXML
-    private Label allUeLabel;
     
-    @FXML
-    private Label closeCircle;
-
-
-    
-    private Pane teacherPane, uePane, repartitionPane, reviewPane, yearPane, groupPane;
+    private Pane teacherPane, uePane, repartitionPane, reviewPane, yearPane, groupPane, dashPane;
 	
     @Override
     public void initialize(URL location, ResourceBundle resources) {	    
     	System.out.println(LocalDate.now());
-    	allTeacherLabel.setText(Utils.getObsListTeacher().size() + "");
-
-    	allUeLabel.setText(Utils.getObsListTeacher().size() + "");    	
+    	  	
     	
     	// fxml files loading
     	try {
+			dashPane  = FXMLLoader.load(getClass().getResource("/views/dash.fxml"));
 	    	teacherPane = FXMLLoader.load(getClass().getResource("/views/teacher_pane.fxml"));
 			uePane = FXMLLoader.load(getClass().getResource("/views/ue_pane.fxml"));
 			repartitionPane = FXMLLoader.load(getClass().getResource("/views/repartition_pane.fxml"));
 			reviewPane = FXMLLoader.load(getClass().getResource("/views/review_pane.fxml"));
 			yearPane = FXMLLoader.load(getClass().getResource("/views/year_pane.fxml"));
 			groupPane = FXMLLoader.load(getClass().getResource("/views/group_pane.fxml"));
-		
+					
 
 			// Add all fxml panes to home stackpane
-			parent_container.getChildren().addAll(reviewPane, repartitionPane, uePane, teacherPane, yearPane, groupPane);
+			parent_container.getChildren().addAll(dashPane, reviewPane, repartitionPane, uePane, teacherPane, yearPane, groupPane);
 			
-			toFront(homePane, teacherPane, uePane, repartitionPane, reviewPane, yearPane, groupPane);
+			toFront(dashPane, teacherPane, uePane, repartitionPane, reviewPane, yearPane, groupPane);
     	} catch(IOException e) {
     		e.printStackTrace();
     	}
     	
     	// close button action
-    	closeCircle.setOnMouseClicked((e) -> Platform.exit());
     }
     
     @FXML
     private void handleClicks(ActionEvent event) throws IOException {
     	if(event.getSource() == homeBtn) {
 //    		load();
-    		toFront(homePane, teacherPane, uePane, repartitionPane, reviewPane, yearPane, groupPane);
+//    		homePane = FXMLLoader.load(getClass().getResource("/views/home.fxml"));
+//    		parent_container.getChildren().add(dashPane);
+    		toFront(dashPane, teacherPane, uePane, repartitionPane, reviewPane, yearPane, groupPane);
     	}
     	if(event.getSource() == teacherBtn) {
 //    		load();
-	    	teacherPane = FXMLLoader.load(getClass().getResource("/views/teacher_pane.fxml"));
-	    	parent_container.getChildren().add(teacherPane);
-    		toFront(teacherPane, uePane, homePane, repartitionPane, reviewPane,  yearPane, groupPane);
+//	    	teacherPane = FXMLLoader.load(getClass().getResource("/views/teacher_pane.fxml"));
+//	    	parent_container.getChildren().add(teacherPane);
+    		toFront(teacherPane, uePane, dashPane, repartitionPane, reviewPane,  yearPane, groupPane);
     	}
     	if(event.getSource() == ueBtn) {
 //			load();
-			uePane = FXMLLoader.load(getClass().getResource("/views/ue_pane.fxml"));
-    		toFront(uePane, homePane, teacherPane, repartitionPane, reviewPane, yearPane, groupPane);
+//			uePane = FXMLLoader.load(getClass().getResource("/views/ue_pane.fxml"));
+    		toFront(uePane, dashPane, teacherPane, repartitionPane, reviewPane, yearPane, groupPane);
     	}
     	if(event.getSource() == repartitionBtn) {    	
 //			load();
-			repartitionPane = FXMLLoader.load(getClass().getResource("/views/repartition_pane.fxml"));
-    		toFront(repartitionPane, homePane, teacherPane, uePane, reviewPane, yearPane, groupPane);
+//			repartitionPane = FXMLLoader.load(getClass().getResource("/views/repartition_pane.fxml"));
+    		toFront(repartitionPane, dashPane, teacherPane, uePane, reviewPane, yearPane, groupPane);
     	}
     	if(event.getSource() == reviewBtn) {
 //			load();
-			reviewPane = FXMLLoader.load(getClass().getResource("/views/review_pane.fxml"));
-    		toFront(reviewPane, homePane, teacherPane, uePane, repartitionPane,  yearPane, groupPane);
+//			reviewPane = FXMLLoader.load(getClass().getResource("/views/review_pane.fxml"));
+    		toFront(reviewPane, dashPane, teacherPane, uePane, repartitionPane,  yearPane, groupPane);
     	}
     	if(event.getSource() == yearBtn) {
 //			load();
-			yearPane = FXMLLoader.load(getClass().getResource("/views/year_pane.fxml"));
-    		toFront(yearPane, reviewPane, homePane, teacherPane, uePane, repartitionPane, groupPane);
+//			yearPane = FXMLLoader.load(getClass().getResource("/views/year_pane.fxml"));
+    		toFront(yearPane, reviewPane, dashPane, teacherPane, uePane, repartitionPane, groupPane);
     	}
     	if(event.getSource() == groupBtn) {
 //			load();
-			groupPane = FXMLLoader.load(getClass().getResource("/views/group_pane.fxml"));
-    		toFront(groupPane, reviewPane, homePane, teacherPane, uePane, repartitionPane, yearPane);
+//			groupPane = FXMLLoader.load(getClass().getResource("/views/group_pane.fxml"));
+    		toFront(groupPane, reviewPane, dashPane, teacherPane, uePane, repartitionPane, yearPane);
     	}
     }
     

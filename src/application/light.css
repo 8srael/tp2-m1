@@ -152,3 +152,14 @@
     -fx-border-style: solid;
 }
 
+.teacher-count {
+	-fx-padding : 30px;
+	-fx-background-color: #25bfbb4B;
+	-fx-background-radius: 10;
+}
+
+.ue-count {
+	-fx-padding : 30px;
+	-fx-background-color: #fb93a94B;
+	-fx-background-radius: 10;
+}

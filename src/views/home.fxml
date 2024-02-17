@@ -8,12 +8,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -133,62 +131,7 @@
                   </InnerShadow>
                </effect>
             </VBox>
-            <StackPane fx:id="parent_container" layoutX="207.0" prefHeight="530.0" prefWidth="764.0">
-               <children>
-                  <Pane fx:id="homePane">
-                     <children>
-                        <Label layoutX="255.0" layoutY="38.0" text="LOGICIEL DE REAPRTITION DES HEURES">
-                           <font>
-                              <Font name="SimSun-ExtB" size="15.0" />
-                           </font>
-                        </Label>
-                        <HBox alignment="CENTER" layoutX="212.0" layoutY="238.0" spacing="100.0">
-                           <children>
-                              <VBox alignment="CENTER">
-                                 <children>
-                                    <Label fx:id="allTeacherLabel" textFill="#1cbabf">
-                                       <font>
-                                          <Font name="System Bold" size="40.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Enseignants">
-                                       <font>
-                                          <Font name="SimSun-ExtB" size="15.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER">
-                                 <children>
-                                    <Label fx:id="allUeLabel" textFill="#fa5e7e">
-                                       <font>
-                                          <Font name="System Bold" size="40.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Unités d'enseignement">
-                                       <font>
-                                          <Font name="SimSun-ExtB" size="15.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <Circle fill="#f94344" layoutX="737.0" layoutY="24.0" radius="14.0" stroke="WHITE" strokeType="INSIDE" />
-                        <Label fx:id="closeCircle" alignment="CENTER" layoutX="722.0" layoutY="16.0" prefHeight="17.0" prefWidth="28.0" text="X" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="yearLabel" layoutX="382.0" layoutY="401.0">
-                           <font>
-                              <Font name="Ink Free" size="30.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-               </children>
-            </StackPane>
+            <StackPane fx:id="parent_container" layoutX="207.0" prefHeight="530.0" prefWidth="764.0" />
          </children>
       </Pane>
    </children>
