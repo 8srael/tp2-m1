@@ -163,3 +163,14 @@
 	-fx-background-color: #fb93a94B;
 	-fx-background-radius: 10;
 }
+
+.year-count {
+	-fx-padding : 30px;
+	-fx-background-color: #2a73ff4B;
+	-fx-background-radius: 10;
+}
+
+.active, .active:hover {
+	 -fx-background-color: #e1dbdb; 
+	 -fx-text-fill : #2a73ff;
+}

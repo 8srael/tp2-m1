@@ -12,6 +12,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -19,13 +21,24 @@
    <children>
       <Pane style="-fx-background-color: #FFF; -fx-background-radius: 10;">
          <children>
-            <VBox prefHeight="530.0" prefWidth="207.0" style="-fx-background-color: #E5E5E5;">
+            <VBox alignment="CENTER" prefHeight="530.0" prefWidth="207.0" style="-fx-background-color: #E5E5E5;">
                <children>
-                  <ImageView fitHeight="144.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pics/logo.png" />
+                        <Image url="@../pics/dash-pic.png" />
                      </image>
                   </ImageView>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="171.0" text="HOUR REPARTITION PROJECT">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#2a73ff" />
+                              <Stop color="#fa5e7e" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Line endX="200.0" stroke="#e1dbdb" />
                   <Button fx:id="homeBtn" alignment="BASELINE_LEFT" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="37.0" prefWidth="210.0" text="ACCUEIL">
                      <font>
                         <Font name="SimSun" size="13.0" />

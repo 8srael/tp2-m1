@@ -55,6 +55,9 @@ public class ReviewPaneController implements Initializable {
     @FXML
     private TableColumn<CombinedDataReview, Integer> tpColumn;
     
+    @FXML
+    private Label globalSum;
+    
 	private ObservableList<CombinedDataReview> combinedDataObsList = FXCollections.observableArrayList();
 
 	@Override
@@ -87,6 +90,8 @@ public class ReviewPaneController implements Initializable {
 						totalCMLabel.setText((Number)Utils.getSum(newT, newY)[0] + "");
 						totalTDLabel.setText((Number)Utils.getSum(newT, newY)[1] + "");
 						totalTPLabel.setText((Number)Utils.getSum(newT, newY)[2] + "");
+						
+						globalSum.setText(String.valueOf(Utils.getGlobalSum((Number)Utils.getSum(newT, newY)[0] , (Number)Utils.getSum(newT, newY)[1], (Number)Utils.getSum(newT, newY)[2], newT.getGrade())));
 					}
 	
 					Utils.labelCenter(totalCMLabel, totalTDLabel, totalTPLabel);

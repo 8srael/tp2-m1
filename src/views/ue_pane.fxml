@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="765.0" stylesheets="@../application/light.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UEPaneController">
@@ -117,20 +116,7 @@
             </HBox>
          </children>
       </VBox>
-      <HBox layoutX="243.0" layoutY="245.0" spacing="10.0">
-         <children>
-            <Label text="LISTE - UE">
-               <font>
-                  <Font name="SimSun" size="18.0" />
-               </font>
-            </Label>
-            <Label text="NOMBRE TOTAL DES UES" textFill="#a45a47">
-               <font>
-                  <Font name="SimSun" size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
+      <HBox layoutX="243.0" layoutY="245.0" spacing="10.0" />
       <TableView fx:id="ueTableView" layoutX="-1.0" layoutY="284.0" prefHeight="246.0" prefWidth="766.0">
         <columns>
           <TableColumn fx:id="codeColumn" prefWidth="140.0" text="Code" />
@@ -159,10 +145,9 @@
             </JFXButton>
          </children>
       </VBox>
-      <Circle fill="#f94344" layoutX="737.0" layoutY="24.0" radius="14.0" stroke="WHITE" strokeType="INSIDE" />
-      <Label fx:id="lblClose" alignment="CENTER" layoutX="723.0" layoutY="16.0" prefHeight="17.0" prefWidth="28.0" text="X" textFill="WHITE">
+      <Label layoutX="337.0" layoutY="244.0" text="LISTE - UE">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="SimSun" size="18.0" />
          </font>
       </Label>
    </children>

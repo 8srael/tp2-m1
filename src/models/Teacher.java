@@ -5,17 +5,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 /**
  * The persistent class for the teachers database table.
- * 
  */
 @Entity
 @Table(name="teachers")
@@ -31,7 +28,7 @@ public class Teacher {
 	@Column(name = "lastName", nullable = false, length = 250)
 	private String lastName;
 	
-	@Column(name = "tel", nullable = false, length = 150)
+	@Column(name = "tel", nullable = false, length = 150)	
 	private String tel;
 	
 	@Column(name = "email", nullable = false, length = 250)
@@ -45,20 +42,20 @@ public class Teacher {
 	
 	public Teacher() {}
 
-	public long getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public Teacher(String firstName, String lastName, String email, String tel, String grade) {
 		this.email = email;
 		this.firstName = firstName;
 		this.grade = grade;
 		this.lastName = lastName;
 		this.tel = tel;
+	}
+	
+	public long getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getEmail() {

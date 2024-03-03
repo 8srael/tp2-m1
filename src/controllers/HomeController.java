@@ -47,6 +47,8 @@ public class HomeController implements Initializable {
     
     
     private Pane teacherPane, uePane, repartitionPane, reviewPane, yearPane, groupPane, dashPane;
+    
+    private Button activeButton;
 	
     @Override
     public void initialize(URL location, ResourceBundle resources) {	    
@@ -77,6 +79,7 @@ public class HomeController implements Initializable {
     
     @FXML
     private void handleClicks(ActionEvent event) throws IOException {
+    	showPane((Button) event.getSource());
     	if(event.getSource() == homeBtn) {
 //    		load();
 //    		homePane = FXMLLoader.load(getClass().getResource("/views/home.fxml"));
@@ -165,5 +168,13 @@ public class HomeController implements Initializable {
     	} catch(IOException e) {
     		e.printStackTrace();
     	}
+    }
+    
+    private void showPane(Button button) {
+    	if (activeButton != null)
+            activeButton.getStyleClass().remove("active"); // Supprimer la classe CSS du bouton actif précédent
+    
+        activeButton = button;
+        activeButton.getStyleClass().add("active"); // Ajouter la classe CSS au bouton actif actuel	
     }
 }

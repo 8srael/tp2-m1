@@ -1,11 +1,7 @@
 package controllers;
 
 import java.net.URL;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
-
-import javax.persistence.EntityManager;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -14,9 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import models.Year;
-import utils.GenericEntity;
-import utils.JPAUtil;
 
 public class HomeControllerDark implements Initializable {
 

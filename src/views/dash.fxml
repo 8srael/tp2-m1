@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="homePane" stylesheets="@../application/light.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashController">
@@ -14,13 +14,7 @@
             <Font name="SimSun-ExtB" size="20.0" />
          </font>
       </Label>
-      <Circle fill="#f94344" layoutX="737.0" layoutY="24.0" radius="14.0" stroke="WHITE" strokeType="INSIDE" />
-      <Label fx:id="closeCircle" alignment="CENTER" layoutX="722.0" layoutY="16.0" prefHeight="17.0" prefWidth="28.0" text="X" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <VBox alignment="CENTER" layoutX="77.0" layoutY="124.0" prefHeight="139.0" prefWidth="282.0" styleClass="teacher-count">
+      <VBox alignment="CENTER" layoutX="236.0" layoutY="98.0" prefHeight="139.0" prefWidth="282.0" styleClass="teacher-count">
          <children>
             <Label fx:id="allTeacherLabel" alignment="TOP_RIGHT" contentDisplay="TOP" text="10" textFill="#25bfbb">
                <font>
@@ -37,7 +31,29 @@
             </Label>
          </children>
       </VBox>
-      <VBox alignment="CENTER" layoutX="401.0" layoutY="258.0" styleClass="ue-count">
+      <VBox alignment="CENTER" layoutX="401.0" layoutY="258.0" prefWidth="282.0" styleClass="year-count">
+         <children>
+            <Label fx:id="allYearLabel" text="15" textFill="#2a73ff">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <Label text="Annees" textFill="#2a73ff">
+               <font>
+                  <Font name="SimSun-ExtB" size="19.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon fill="#2a73ff" glyphName="DASHBOARD" />
+               </graphic>
+            </Label>
+         </children>
+      </VBox>
+      <Label fx:id="yearLabel" layoutX="382.0" layoutY="401.0">
+         <font>
+            <Font name="Ink Free" size="30.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutX="45.0" layoutY="258.0" styleClass="ue-count">
          <children>
             <Label fx:id="allUeLabel" text="15" textFill="#fa5e7e">
                <font>
@@ -54,10 +70,8 @@
             </Label>
          </children>
       </VBox>
-      <Label fx:id="yearLabel" layoutX="382.0" layoutY="401.0">
-         <font>
-            <Font name="Ink Free" size="30.0" />
-         </font>
-      </Label>
    </children>
+   <padding>
+      <Insets right="70.0" />
+   </padding>
 </Pane>

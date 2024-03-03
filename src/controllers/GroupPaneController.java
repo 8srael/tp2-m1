@@ -79,9 +79,6 @@ public class GroupPaneController implements Initializable {
     @FXML
     private TableColumn<CombinedDataGroup, Integer> gtpColumn;
 
-    @FXML
-    private Label lblClose;
-
     private Alert alert;
 //    private List<StackPane> stackFields = new ArrayList<>();
     private CombinedDataGroup selectedGroup;

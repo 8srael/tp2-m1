@@ -76,9 +76,7 @@ public class TeacherPaneController implements Initializable {
 	    
     //Animated textfields container
 	private List<StackPane> stackFields = new ArrayList<>();
-	
-	private  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	private  GenericEntity<Teacher> teacherEntity = new GenericEntity<>(entityManager, Teacher.class);	
+		
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -132,7 +130,7 @@ public class TeacherPaneController implements Initializable {
 			alert.show();
 		} else {
 			Teacher teacher = new Teacher(firstNameField.getText().toUpperCase(), lastNameField.getText(), emailField.getText(), telField.getText(), gradeComboBox.getSelectionModel().selectedItemProperty().get());;
-			teacherEntity.create(teacher);
+			Utils.getTeacherEntity().create(teacher);
 			Utils.getObsListTeacher().add(teacher);
 			alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Teacher creation information".toUpperCase());
@@ -158,7 +156,7 @@ public class TeacherPaneController implements Initializable {
 	 			selectedTeacher.setTel(telField.getText());
 	 			selectedTeacher.setEmail(emailField.getText());
 	 			
-	 			Utils.getObsListTeacher().set(Utils.getObsListTeacher().indexOf(selectedTeacher), teacherEntity.update(selectedTeacher));
+	 			Utils.getObsListTeacher().set(Utils.getObsListTeacher().indexOf(selectedTeacher), Utils.getTeacherEntity().update(selectedTeacher));
 	 			
 	 			clearControls();
 	 				 			
@@ -180,7 +178,7 @@ public class TeacherPaneController implements Initializable {
 			 alert.setContentText("No teacher selected !\nPlease select a teacher 👤");
 			 alert.show();
 		 } else {
-			   teacherEntity.delete(selectedTeacher.getId());
+			   Utils.getTeacherEntity().delete(selectedTeacher.getId());
 			 
 				// delete the chosen teacher instance in observableList of person 
 			   Utils.getObsListTeacher().remove(selectedTeacher);

@@ -1,4 +1,4 @@
-package utils;
+	package utils;
 
 import java.util.List;
 
@@ -141,6 +141,34 @@ public class Utils {
 		query.setParameter("year", year);
 		
 		return query.getSingleResult();
+		
+	}
+	
+	
+	public static double getGlobalSum(Number cm, Number td, Number tp, String grade) {
+		double sum = 0;
+		
+		
+		if(grade.equalsIgnoreCase("Maitre de conférences") || grade.equalsIgnoreCase("Professeur Titulaire")) {
+			
+			System.out.println("ok");
+			double tdConverted = td.doubleValue()/1.6 ;
+			double tpConverted = tp.doubleValue()/2.4;
+			
+			sum = cm.doubleValue() + tdConverted + tpConverted;
+		} else if(grade.equalsIgnoreCase("Maitre assistant")) {
+			double cmConverted = cm.doubleValue()/0.625;
+			double tpConverted = tp.doubleValue()/1.5;
+			
+			sum = cmConverted + td.doubleValue() + tpConverted;
+		} else if(grade.equalsIgnoreCase("Assistant")) {
+			double cmConverted = cm.doubleValue()/0.417;
+			double tdConverted = tp.doubleValue()/0.667;
+			
+			sum = cmConverted + tdConverted + tp.doubleValue();
+		}
+		
+		return sum;
 		
 	}
 	

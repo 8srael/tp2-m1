@@ -5,8 +5,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 
@@ -17,6 +17,8 @@ public class Tp2Main extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/views/home.fxml"));
 			primaryStage.setTitle("Hours Repartition Project");
+	        Image icon = new Image("C:\\M1_WORKSPACE\\hours_repartition_project\\src\\pics\\dash-pic.png");
+
 //			primaryStage.initStyle(StageStyle.UNDECORATED);
 			FadeTransition fadeIn = new FadeTransition(Duration.seconds(2), root);
 		    fadeIn.setFromValue(0);
@@ -34,6 +36,7 @@ public class Tp2Main extends Application {
 				primaryStage.setY(e.getSceneY() - y);
 			});
 			primaryStage.setScene(new Scene(root));
+	        primaryStage.getIcons().add(icon); 
 			primaryStage.show();
 			
 		} catch(Exception e) {

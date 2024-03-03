@@ -17,10 +17,9 @@ public class DashController implements Initializable {
 	    
 	@FXML
 	private Label allTeacherLabel;
-	    
-
+	
 	@FXML
-	private Label closeCircle;
+	private Label allYearLabel;
 
 	
 	@Override
@@ -28,9 +27,7 @@ public class DashController implements Initializable {
 		
     	allTeacherLabel.textProperty().bind(Bindings.size(Utils.getObsListTeacher()).asString());
     	allUeLabel.textProperty().bind(Bindings.size(Utils.getObsListUE()).asString());
-    	
-    	closeCircle.setOnMouseClicked((e) -> Platform.exit());
-		
+    	allYearLabel.textProperty().bind(Bindings.size(Utils.getObsListYear()).asString());
 	}
 
 }
